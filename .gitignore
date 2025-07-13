@@ -8,10 +8,9 @@ pnpm-debug.log*
 lerna-debug.log*
 
 # .gitignore
-dist/
+node_modules
 dist
-node_modules/
-.env
+dist-ssr
 *.local
 
 # Editor directories and files

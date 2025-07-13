@@ -1,0 +1,373 @@
+@font-face {
+  font-family: "Korinth";
+  src: url("../assets/fonts/Korinth_Serial_Regular_DB.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Korinth", "PT Serif", "Georgia";
+}
+
+body {
+  background: #000;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 20px 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  background: transparent;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-logo {
+  width: 32px;
+  height: 32px;
+  filter: brightness(1.2);
+}
+
+.nav-link {
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.nav-link:hover {
+  color: #64b5f6;
+  text-shadow: 0 0 20px rgba(100, 181, 246, 0.6);
+  transform: translateY(-2px);
+}
+
+.section {
+  height: 150vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+.start-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.start-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.section-content {
+  position: relative;
+  z-index: 10;
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 50px;
+  text-align: center;
+}
+
+.hero-content {
+  position: absolute;
+  top: 120px;
+  left: 50px;
+  z-index: 10;
+  max-width: 600px;
+  width: 100%;
+  text-align: left;
+}
+
+.hero-title {
+  font-size: 5rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.8);
+}
+
+.hero-subtitle {
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 40px;
+  line-height: 1.6;
+  text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.8);
+}
+
+.section-content-left {
+  position: absolute;
+  top: 120px;
+  left: 50px;
+  z-index: 10;
+  max-width: 600px;
+  width: 100%;
+  text-align: left;
+}
+
+.section-content-right {
+  position: absolute;
+  top: 120px;
+  right: 50px;
+  z-index: 10;
+  max-width: 600px;
+  width: 100%;
+  text-align: right;
+}
+
+.section-badge {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.8);
+}
+
+.section-title {
+  font-size: 3.5rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.8);
+}
+
+.section-text {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.8;
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.8);
+  max-width: 800px;
+}
+
+.contest-content {
+  text-align: center;
+  max-width: 800px;
+  position: relative;
+  z-index: 10;
+}
+
+.contest-title {
+  font-size: 3.5rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.8);
+}
+
+.contest-text {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.8;
+  margin-bottom: 40px;
+  text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.8);
+}
+
+.contest-links {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.contest-link {
+  padding: 15px 30px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  text-decoration: none;
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s;
+  backdrop-filter: blur(10px);
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.contest-link:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.telegram-link {
+  color: #64b5f6;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.telegram-link:hover {
+  color: #42a5f5;
+  text-shadow: 0 0 10px rgba(100, 181, 246, 0.5);
+}
+
+.media-controls {
+  position: fixed;
+  bottom: 20px;
+  left: 49%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.progress-bar {
+  width: 100px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ff6b6b, #ffa726);
+  border-radius: 3px;
+  transition: width 0.1s ease-out;
+}
+
+.floating-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+}
+
+.firefly {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 5;
+  filter: brightness(1.5) drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+}
+
+.cloud {
+  position: absolute;
+  width: 200px;
+  height: 100px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.birds {
+  position: absolute;
+  width: 120px;
+  height: 80px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 2;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 15px 25px;
+    gap: 30px;
+  }
+
+  .nav-logo {
+    width: 24px;
+    height: 24px;
+  }
+
+  .nav-link {
+    font-size: 16px;
+  }
+
+  .hero-content,
+  .section-content-left,
+  .section-content-right {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    padding: 0 25px;
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .contest-title {
+    font-size: 2rem;
+  }
+
+  .progress-bar {
+    width: 300px;
+  }
+
+  .contest-links {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-subtitle,
+  .section-text,
+  .contest-text {
+    font-size: 1rem;
+  }
+}
