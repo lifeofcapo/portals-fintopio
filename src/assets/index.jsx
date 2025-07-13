@@ -1,5 +1,9 @@
 import hero_image from "./1.jpg";
-import second_image from "./2.png";
-import last_image from "./3.png";
+import second_image from "./2.jpg";
+import last_image from "./3.jpg";
+import firefly from "./firefly.png";
+import cloud from "./cloud1.png";
+import cloud2 from "./cloud2.png";
+import birds from "./birds.png";
 
-export { hero_image, second_image, last_image };
+export { hero_image, second_image, last_image, firefly, cloud, cloud2, birds };

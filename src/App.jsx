@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { hero_image, second_image, last_image } from "./assets";
+import {
+  hero_image,
+  second_image,
+  last_image,
+  firefly,
+  cloud,
+  cloud2,
+  birds,
+} from "./assets";
 import "./App.css";
 
 const styles = `
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -11,7 +21,7 @@ const styles = `
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: #000;
 }
 
@@ -29,10 +39,10 @@ body {
   z-index: 1000;
   padding: 20px 50px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -41,13 +51,11 @@ body {
   font-weight: bold;
   color: white;
   text-decoration: none;
-  align-items: center;
-  justify-content: center;
   text-align: center;
 }
 
 .section {
-  height: 100vh;
+  height: 150vh;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -61,7 +69,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   z-index: 1;
@@ -77,12 +85,13 @@ body {
 }
 
 .hero-content {
-  position: relative;
+  position: absolute;
+  top: 120px;
+  left: 50px;
   z-index: 10;
-  max-width: 800px;
+  max-width: 600px;
   width: 100%;
-  padding: 0 50px;
-  text-align: center;
+  text-align: left;
 }
 
 .hero-title {
@@ -101,24 +110,24 @@ body {
   text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.8);
 }
 
-.start-btn {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  border: none;
-  padding: 15px 30px;
-  font-size: 1.1rem;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: all 0.3s;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+.section-content-left {
+  position: absolute;
+  top: 120px;
+  left: 50px;
+  z-index: 10;
+  max-width: 600px;
+  width: 100%;
+  text-align: left;
 }
 
-.start-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+.section-content-right {
+  position: absolute;
+  top: 120px;
+  right: 50px;
+  z-index: 10;
+  max-width: 600px;
+  width: 100%;
+  text-align: right;
 }
 
 .section-badge {
@@ -145,8 +154,6 @@ body {
   margin-bottom: 30px;
   text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.8);
   max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .contest-content {
@@ -197,6 +204,17 @@ body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
+.telegram-link {
+  color: #64B5F6;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.telegram-link:hover {
+  color: #42A5F5;
+  text-shadow: 0 0 10px rgba(100, 181, 246, 0.5);
+}
+
 .media-controls {
   position: fixed;
   bottom: 20px;
@@ -238,13 +256,60 @@ body {
   border-radius: 50%;
 }
 
+.firefly {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #FFD700;
+  border-radius: 50%;
+  box-shadow: 0 0 20px #FFD700, 0 0 40px #FFD700;
+  pointer-events: none;
+}
+
+.cloud {
+  position: absolute;
+  pointer-events: none;
+  filter: brightness(0.8);
+}
+
+.cloud1 {
+  width: 120px;
+  height: 80px;
+  top: 15%;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+}
+
+.cloud2 {
+  width: 100px;
+  height: 60px;
+  top: 25%;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 40px;
+}
+
+.birds {
+  position: absolute;
+  width: 40px;
+  height: 30px;
+  top: 20%;
+  filter: brightness(0.4);
+  pointer-events: none;
+}
+
 @media (max-width: 768px) {
   .header {
     padding: 15px 25px;
   }
 
-  .section-content, .hero-content {
+  .hero-content, .section-content-left, .section-content-right {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
     padding: 0 25px;
+    text-align: center;
+    max-width: 100%;
   }
 
   .hero-title {
@@ -303,6 +368,117 @@ const FloatingParticles = () => {
   );
 };
 
+const Fireflies = () => {
+  const fireflies = Array.from({ length: 15 }, (_, i) => i);
+
+  return (
+    <>
+      {fireflies.map((firefly) => (
+        <motion.div
+          key={firefly}
+          className="firefly"
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+          }}
+          animate={{
+            x: [0, Math.random() * 200 - 100, 0],
+            y: [0, Math.random() * 200 - 100, 0],
+            opacity: [0.2, 1, 0.2],
+            scale: [0.5, 1.5, 0.5],
+          }}
+          transition={{
+            duration: 4 + Math.random() * 3,
+            repeat: Infinity,
+            delay: Math.random() * 3,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </>
+  );
+};
+
+const Clouds = () => {
+  return (
+    <>
+      <motion.div
+        className="cloud cloud1"
+        animate={{
+          x: ["-120px", "100vw"],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+      />
+      <motion.div
+        className="cloud cloud2"
+        animate={{
+          x: ["-100px", "100vw"],
+        }}
+        transition={{
+          duration: 25,
+          repeat: Infinity,
+          ease: "linear",
+          delay: 5,
+        }}
+      />
+    </>
+  );
+};
+
+const Birds = () => {
+  return (
+    <motion.div
+      className="birds"
+      animate={{
+        x: ["-40px", "100vw"],
+      }}
+      transition={{
+        duration: 15,
+        repeat: Infinity,
+        ease: "linear",
+        delay: 3,
+      }}
+    >
+      🦅
+    </motion.div>
+  );
+};
+
+const formatTextWithLinks = (text) => {
+  return text.split(/(@portals|@fintopio)/g).map((part, index) => {
+    if (part === "@portals") {
+      return (
+        <a
+          key={index}
+          href="https://t.me/portals"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="telegram-link"
+        >
+          @portals
+        </a>
+      );
+    } else if (part === "@fintopio") {
+      return (
+        <a
+          key={index}
+          href="https://t.me/fintopio"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="telegram-link"
+        >
+          @fintopio
+        </a>
+      );
+    }
+    return part;
+  });
+};
+
 function App() {
   const [currentSection, setCurrentSection] = useState(0);
   const { scrollYProgress } = useScroll();
@@ -322,13 +498,6 @@ function App() {
 
   const progress = useTransform(scrollYProgress, [0, 1], [0, 100]);
 
-  const scrollToSection = (index) => {
-    window.scrollTo({
-      top: index * window.innerHeight,
-      behavior: "smooth",
-    });
-  };
-
   return (
     <>
       <style>{styles}</style>
@@ -339,7 +508,11 @@ function App() {
           animate={{ y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <motion.a href="#" className="logo" whileHover={{ scale: 1.1 }}>
+          <motion.a
+            href="https://t.me/portals"
+            className="logo"
+            whileHover={{ scale: 1.1 }}
+          >
             Portals & Fintopio
           </motion.a>
         </motion.header>
@@ -357,6 +530,8 @@ function App() {
           />
           <div className="section-overlay" />
           <FloatingParticles />
+          <Clouds />
+          <Birds />
 
           <div className="hero-content">
             <motion.h1
@@ -374,21 +549,10 @@ function App() {
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 1, delay: 0.5 }}
             >
-              В далёком мире были два великих творения: @portals — врата в
-              безграничное, и @fintopio — поток токенов знаний и силы.
+              {formatTextWithLinks(
+                "В далёком мире были два великих творения: @portals — врата в безграничное, и @fintopio — поток токенов знаний и силы."
+              )}
             </motion.p>
-
-            <motion.button
-              className="start-btn"
-              initial={{ y: 100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1, delay: 0.7 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => scrollToSection(1)}
-            >
-              Начать путешествие →
-            </motion.button>
           </div>
         </motion.section>
 
@@ -405,8 +569,9 @@ function App() {
           />
           <div className="section-overlay" />
           <FloatingParticles />
+          <Fireflies />
 
-          <div className="section-content">
+          <div className="section-content-right">
             <motion.div
               initial={{ y: 100, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
@@ -430,10 +595,9 @@ function App() {
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 1, delay: 0.6 }}
             >
-              искал истину и услышал о волшебных вратах — Портале, что открывает
-              двери в любые миры. Но топливо для путешествий — не золото, а
-              токены из Финтопии. Однажды он подошёл к вратам: слева мерцал
-              портал, справа струился невидимый поток токенов @fintopio.
+              {formatTextWithLinks(
+                "искал истину и услышал о волшебных вратах — Портале, что открывает двери в любые миры. Но топливо для путешествий — не золото, а токены из Финтопии. Однажды он подошёл к вратам: слева мерцал портал, справа струился невидимый поток токенов @fintopio."
+              )}
             </motion.p>
           </div>
         </motion.section>
@@ -451,8 +615,9 @@ function App() {
           />
           <div className="section-overlay" />
           <FloatingParticles />
+          <Fireflies />
 
-          <div className="section-content">
+          <div className="section-content-left">
             <motion.div
               initial={{ y: 100, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
@@ -476,10 +641,9 @@ function App() {
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 1, delay: 0.6 }}
             >
-              он нашёл там ответы, о которых не смел мечтать. А если
-              прислушаться, можно услышать шаги Искателя — там, где сливаются
-              бесконечность @portals и поток @fintopio. Врата раскрылись, и он
-              исчез в поисках истины.
+              {formatTextWithLinks(
+                "он нашёл там ответы, о которых не смел мечтать. А если прислушаться, можно услышать шаги Искателя — там, где сливаются бесконечность @portals и поток @fintopio. Врата раскрылись, и он исчез в поисках истины."
+              )}
             </motion.p>
           </div>
         </motion.section>
@@ -497,6 +661,7 @@ function App() {
         >
           <div className="section-overlay" />
           <FloatingParticles />
+          <Fireflies />
 
           <div className="contest-content">
             <motion.div
@@ -523,9 +688,9 @@ function App() {
               transition={{ duration: 1, delay: 0.6 }}
             >
               Этот интерактивный сайт был создан специально для участия в
-              конкурсе, демонстрируя возможности современных веб-технологий и
-              креативного дизайна. Объединяя притчу о порталах и финтопии с
-              плавными анимациями и отзывчивым интерфейсом.
+              конкурсе СТЕНКИ, демонстрируя возможности современных
+              веб-технологий и креативного дизайна. Объединяя притчу о порталах
+              и финтопии с плавными анимациями и отзывчивым интерфейсом.
             </motion.p>
 
             <motion.p
@@ -534,8 +699,9 @@ function App() {
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 1, delay: 0.8 }}
             >
-              Путешествие к новым горизонтам. Скорее отправляйся в @portals и
-              @fintopio
+              {formatTextWithLinks(
+                "Путешествие к новым горизонтам. Скорее отправляйся в @portals и @fintopio"
+              )}
             </motion.p>
 
             <motion.div
@@ -545,7 +711,7 @@ function App() {
               transition={{ duration: 1, delay: 1 }}
             >
               <motion.a
-                href="#"
+                href="https://t.me/portals"
                 className="contest-link"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -553,7 +719,7 @@ function App() {
                 @portals
               </motion.a>
               <motion.a
-                href="#"
+                href="https://t.me/fintopio"
                 className="contest-link"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
