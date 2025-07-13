@@ -8,20 +8,33 @@ import {
   cloud,
   cloud2,
   birds,
+  portals,
+  fintopio,
+  solobird,
 } from "./assets";
 import "./App.css";
 
-const styles = `
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+const fontFace = `
+@font-face {
+  font-family: 'Korinth';
+  src: url('../assets/fonts/Korinth_Serial_Regular_DB.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+`;
 
+const styles =
+  fontFace +
+  `
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Korinth', 'PT Serif', 'Georgia';
 }
 
 body {
-  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: #000;
 }
 
@@ -41,17 +54,35 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(5px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 60px;
+  background: transparent;
 }
 
-.logo {
-  font-size: 24px;
-  font-weight: bold;
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-logo {
+  width: 32px;
+  height: 32px;
+  filter: brightness(1.2);
+}
+
+.nav-link {
+  font-size: 20px;
+  font-weight: 600;
   color: white;
   text-decoration: none;
-  text-align: center;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.nav-link:hover {
+  color: #64B5F6;
+  text-shadow: 0 0 20px rgba(100, 181, 246, 0.6);
+  transform: translateY(-2px);
 }
 
 .section {
@@ -72,7 +103,27 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  z-index: 1;
+  z-index: 0;
+}
+
+.start-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.start-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .section-content {
@@ -95,7 +146,7 @@ body {
 }
 
 .hero-title {
-  font-size: 6rem;
+  font-size: 5rem;
   font-weight: bold;
   color: white;
   margin-bottom: 30px;
@@ -103,7 +154,7 @@ body {
 }
 
 .hero-subtitle {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: 40px;
   line-height: 1.6;
@@ -133,14 +184,14 @@ body {
 .section-badge {
   color: rgba(255, 255, 255, 0.8);
   margin-bottom: 20px;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   text-transform: uppercase;
   letter-spacing: 3px;
   text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.8);
 }
 
 .section-title {
-  font-size: 4rem;
+  font-size: 3.5rem;
   font-weight: bold;
   color: white;
   margin-bottom: 30px;
@@ -148,7 +199,7 @@ body {
 }
 
 .section-text {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: rgba(255, 255, 255, 0.9);
   line-height: 1.8;
   margin-bottom: 30px;
@@ -164,7 +215,7 @@ body {
 }
 
 .contest-title {
-  font-size: 4rem;
+  font-size: 3.5rem;
   font-weight: bold;
   color: white;
   margin-bottom: 30px;
@@ -172,7 +223,7 @@ body {
 }
 
 .contest-text {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: rgba(255, 255, 255, 0.9);
   line-height: 1.8;
   margin-bottom: 40px;
@@ -258,48 +309,48 @@ body {
 
 .firefly {
   position: absolute;
-  width: 8px;
-  height: 8px;
-  background: #FFD700;
-  border-radius: 50%;
-  box-shadow: 0 0 20px #FFD700, 0 0 40px #FFD700;
+  width: 30px;
+  height: 30px;
+  background-size: contain;
+  background-repeat: no-repeat;
   pointer-events: none;
+  z-index: 5;
+  filter: brightness(1.5) drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
 }
 
 .cloud {
   position: absolute;
+  width: 200px;
+  height: 100px;
+  background-size: contain;
+  background-repeat: no-repeat;
   pointer-events: none;
-  filter: brightness(0.8);
-}
-
-.cloud1 {
-  width: 120px;
-  height: 80px;
-  top: 15%;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 50px;
-}
-
-.cloud2 {
-  width: 100px;
-  height: 60px;
-  top: 25%;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 40px;
+  z-index: 2;
 }
 
 .birds {
   position: absolute;
-  width: 40px;
-  height: 30px;
-  top: 20%;
-  filter: brightness(0.4);
+  width: 120px;
+  height: 80px;
+  background-size: contain;
+  background-repeat: no-repeat;
   pointer-events: none;
+  z-index: 2;
 }
 
 @media (max-width: 768px) {
   .header {
     padding: 15px 25px;
+    gap: 30px;
+  }
+
+  .nav-logo {
+    width: 24px;
+    height: 24px;
+  }
+
+  .nav-link {
+    font-size: 16px;
   }
 
   .hero-content, .section-content-left, .section-content-right {
@@ -313,15 +364,15 @@ body {
   }
 
   .hero-title {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
 
   .section-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 
   .contest-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 
   .progress-bar {
@@ -334,10 +385,73 @@ body {
   }
 
   .hero-subtitle, .section-text, .contest-text {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 }
 `;
+const SoloBirds = () => {
+  return (
+    <>
+      <motion.div
+        className="birds"
+        style={{
+          backgroundImage: `url(${solobird})`,
+          position: "absolute",
+          bottom: "-100px",
+          left: "40%",
+          width: "150px",
+          height: "100px",
+          backgroundSize: "contain",
+          backgroundRepeat: "no-repeat",
+          pointerEvents: "none",
+          zIndex: 2,
+        }}
+        animate={{
+          y: ["0px", "-120vh"],
+          x: ["0px", "-50vw"], // More horizontal movement
+          rotate: [-15, 5, -10], // More pronounced wing flaps
+          opacity: [0, 1, 0.8, 0], // Fade in/out
+        }}
+        transition={{
+          duration: 14,
+          repeat: Infinity,
+          repeatDelay: 5,
+          ease: [0.17, 0.67, 0.83, 0.67], // Bouncy ease for more natural motion
+        }}
+      />
+
+      {/* Second solo bird - different diagonal path */}
+      <motion.div
+        className="birds"
+        style={{
+          backgroundImage: `url(${solobird})`,
+          position: "absolute",
+          bottom: "-100px",
+          left: "60%",
+          width: "130px",
+          height: "150px",
+          backgroundSize: "contain",
+          backgroundRepeat: "no-repeat",
+          pointerEvents: "none",
+          zIndex: 2,
+          filter: "brightness(0.9)",
+        }}
+        animate={{
+          y: ["0px", "-110vh"],
+          x: ["0px", "-40vw"], // Less horizontal than first bird
+          rotate: [10, -5, 8], // Different wing pattern
+          opacity: [0, 0.8, 0.9, 0], // Different fade pattern
+        }}
+        transition={{
+          duration: 16,
+          repeat: Infinity,
+          repeatDelay: 8,
+          ease: [0.2, 0.8, 0.4, 0.9], // Different motion curve
+        }}
+      />
+    </>
+  );
+};
 
 const FloatingParticles = () => {
   const particles = Array.from({ length: 20 }, (_, i) => i);
@@ -369,26 +483,27 @@ const FloatingParticles = () => {
 };
 
 const Fireflies = () => {
-  const fireflies = Array.from({ length: 15 }, (_, i) => i);
+  const fireflies = Array.from({ length: 8 }, (_, i) => i);
 
   return (
     <>
-      {fireflies.map((firefly) => (
+      {fireflies.map((fly) => (
         <motion.div
-          key={firefly}
+          key={fly}
           className="firefly"
           style={{
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
+            backgroundImage: `url(${firefly})`,
           }}
           animate={{
             x: [0, Math.random() * 200 - 100, 0],
             y: [0, Math.random() * 200 - 100, 0],
-            opacity: [0.2, 1, 0.2],
-            scale: [0.5, 1.5, 0.5],
+            opacity: [0.3, 1, 0.3],
+            scale: [0.7, 1.3, 0.7],
           }}
           transition={{
-            duration: 4 + Math.random() * 3,
+            duration: 8 + Math.random() * 5,
             repeat: Infinity,
             delay: Math.random() * 3,
             ease: "easeInOut",
@@ -403,26 +518,54 @@ const Clouds = () => {
   return (
     <>
       <motion.div
-        className="cloud cloud1"
+        className="cloud"
+        style={{
+          backgroundImage: `url(${cloud})`,
+          top: "15%",
+          left: "-200px",
+        }}
         animate={{
-          x: ["-120px", "100vw"],
+          x: ["-200px", "calc(100vw + 200px)"],
         }}
         transition={{
-          duration: 20,
+          duration: 60,
           repeat: Infinity,
           ease: "linear",
         }}
       />
       <motion.div
-        className="cloud cloud2"
+        className="cloud"
+        style={{
+          backgroundImage: `url(${cloud2})`,
+          top: "25%",
+          left: "-200px",
+          right: "auto",
+        }}
         animate={{
-          x: ["-100px", "100vw"],
+          x: ["-200px", "calc(100vw + 200px)"],
         }}
         transition={{
-          duration: 25,
+          duration: 50,
           repeat: Infinity,
           ease: "linear",
-          delay: 5,
+          delay: 10,
+        }}
+      />
+      <motion.div
+        className="cloud"
+        style={{
+          backgroundImage: `url(${cloud})`,
+          top: "35%",
+          left: "-200px",
+        }}
+        animate={{
+          x: ["-200px", "calc(100vw + 200px)"],
+        }}
+        transition={{
+          duration: 70,
+          repeat: Infinity,
+          ease: "linear",
+          delay: 20,
         }}
       />
     </>
@@ -433,18 +576,21 @@ const Birds = () => {
   return (
     <motion.div
       className="birds"
+      style={{
+        backgroundImage: `url(${birds})`,
+        top: "30%",
+        left: "-200px",
+        transform: "translateX(-50%)",
+      }}
       animate={{
-        x: ["-40px", "100vw"],
+        x: ["-200px", "calc(100vw + 200px)"],
       }}
       transition={{
-        duration: 15,
+        duration: 70,
         repeat: Infinity,
         ease: "linear",
-        delay: 3,
       }}
-    >
-      🦅
-    </motion.div>
+    />
   );
 };
 
@@ -508,13 +654,18 @@ function App() {
           animate={{ y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <motion.a
-            href="https://t.me/portals"
-            className="logo"
-            whileHover={{ scale: 1.1 }}
-          >
-            Portals & Fintopio
-          </motion.a>
+          <div className="nav-item">
+            <img src={portals} alt="Portals" className="nav-logo" />
+            <a href="https://t.me/portals" className="nav-link">
+              @portals
+            </a>
+          </div>
+          <div className="nav-item">
+            <img src={fintopio} alt="Fintopio" className="nav-logo" />
+            <a href="https://t.me/fintopio" className="nav-link">
+              @fintopio
+            </a>
+          </div>
         </motion.header>
 
         {/* Hero Section */}
@@ -553,6 +704,16 @@ function App() {
                 "В далёком мире были два великих творения: @portals — врата в безграничное, и @fintopio — поток токенов знаний и силы."
               )}
             </motion.p>
+            <motion.button
+              className="start-btn"
+              initial={{ y: 100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 1, delay: 0.7 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Начать путешествие →
+            </motion.button>
           </div>
         </motion.section>
 
@@ -570,6 +731,7 @@ function App() {
           <div className="section-overlay" />
           <FloatingParticles />
           <Fireflies />
+          <SoloBirds />
 
           <div className="section-content-right">
             <motion.div
@@ -716,7 +878,7 @@ function App() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                @portals
+                Portals
               </motion.a>
               <motion.a
                 href="https://t.me/fintopio"
@@ -724,7 +886,7 @@ function App() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                @fintopio
+                Fintopio
               </motion.a>
             </motion.div>
           </div>
