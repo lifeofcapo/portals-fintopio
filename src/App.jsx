@@ -50,7 +50,6 @@ const formatTextWithLinks = (text) => {
 function App() {
   const [currentSection, setCurrentSection] = useState(0);
   const { scrollYProgress } = useScroll();
-  const [totalSections] = useState(4);
 
   useEffect(() => {
     const handleScroll = () => {
